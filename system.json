@@ -1,0 +1,32 @@
+{
+  "id": "metamorphosys",
+  "title": "Metamorphosys",
+  "description": "Un JdR Dark Fantasy créé par Istrid du Vallion. Incarnez les Épines Pourpres dans le Monde d'Eniel.",
+  "version": "2.0.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Istrid du Vallion"
+    }
+  ],
+  "esmodules": [
+    "metamorphosys.mjs"
+  ],
+  "styles": [
+    "css/metamorphosys.css"
+  ],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    }
+  ],
+  "socket": false,
+  "url": "https://github.com/cedrictorres0427-ops/fvtt-system-metamorphosys",
+  "manifest": "https://github.com/cedrictorres0427-ops/fvtt-system-metamorphosys/releases/latest/download/system.json",
+  "download": "https://github.com/cedrictorres0427-ops/fvtt-system-metamorphosys/releases/download/v2.0.0/metamorphosys.zip"
+}

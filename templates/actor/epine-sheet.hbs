@@ -1,0 +1,233 @@
+<form class="epine-sheet" autocomplete="off">
+
+  {{!-- ══ HEADER ══ --}}
+  <div class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
+    <div class="header-info">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="Nom de l'Épine Pourpre" />
+      </h1>
+      <div class="identity-grid">
+        <div class="id-cell">
+          <label>Surnom</label>
+          <input id="inp-surnom" type="text" value="{{surnom}}" placeholder="—" />
+        </div>
+        <div class="id-cell narrow">
+          <label>N°</label>
+          <input id="inp-numero" type="text" value="{{numero}}" />
+        </div>
+        <div class="id-cell">
+          <label>Insigne</label>
+          <input id="inp-insigne" type="text" value="{{insigne}}" placeholder="—" />
+        </div>
+        <div class="id-cell narrow">
+          <label>Pts à répartir</label>
+          <input id="inp-pts" type="number" value="{{pts}}" min="0" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- ══ TOTAUX ══ --}}
+  <div class="totaux-bar">
+    <div class="total-bloc">
+      <span class="total-label">PHYSIQUE</span>
+      <span class="total-value">{{totalPhysique}}</span>
+    </div>
+    <span class="total-sep">✦</span>
+    <div class="total-bloc">
+      <span class="total-label">ESPRIT</span>
+      <span class="total-value">{{totalEsprit}}</span>
+    </div>
+    <span class="total-sep">✦</span>
+    <div class="total-bloc">
+      <span class="total-label">MENTAL</span>
+      <span class="total-value">{{totalMental}}</span>
+    </div>
+  </div>
+
+  {{!-- ══ STADE VUE SELECTOR ══ --}}
+  <div class="stade-vue-bar">
+    <span class="vue-label">Cumulé jusqu'au stade :</span>
+    <select name="system.stadeVue">
+      <option value="">— Total global —</option>
+      {{#each stadesDebloques}}
+      <option value="{{this.key}}" {{metaSelected ../stadeVue this.key}}>{{this.label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  {{!-- ══ TABS ══ --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item active" data-tab="stades">Stades de Métamorphose</a>
+    <a class="item"        data-tab="inventaire">Inventaire</a>
+  </nav>
+
+  <div class="sheet-body">
+
+    {{!-- ════ TAB : STADES ════ --}}
+    <section class="tab stades active" data-group="primary" data-tab="stades">
+
+      {{#each stagesData}}
+      <div class="stade-block {{#if this.open}}open{{/if}} {{#if this.debloque}}stade-debloque{{/if}}"
+           data-stade-key="{{this.key}}">
+
+        <div class="stade-header">
+          <input type="checkbox"
+                 class="stade-debloque-cb"
+                 data-stade="{{this.key}}"
+                 title="Stade débloqué"
+                 {{#if this.debloque}}checked{{/if}} />
+          <span class="stade-num">{{this.num}}</span>
+          <span class="stade-name">{{this.label}}</span>
+          <em class="stade-oeil">{{this.oeil}}</em>
+          {{#if this.seuil}}
+          <span class="seuil-badge">MENTAL ≥ {{this.seuil}}</span>
+          {{/if}}
+          <i class="fas fa-chevron-down stade-chevron"></i>
+        </div>
+
+        <div class="stade-content">
+
+          {{!-- Caractéristiques --}}
+          <div class="carac-row">
+            <div class="carac-bloc">
+              <label>PHYSIQUE</label>
+              <div class="carac-inputs">
+                <input type="number"
+                       name="{{concat 'system.' this.key '.physique.value'}}"
+                       value="{{this.physique.value}}"
+                       min="0" max="{{this.maxCarac}}" />
+                <span class="max-val">/ {{this.maxCarac}}</span>
+              </div>
+            </div>
+            <div class="carac-bloc">
+              <label>ESPRIT</label>
+              <div class="carac-inputs">
+                <input type="number"
+                       name="{{concat 'system.' this.key '.esprit.value'}}"
+                       value="{{this.esprit.value}}"
+                       min="0" max="{{this.maxCarac}}" />
+                <span class="max-val">/ {{this.maxCarac}}</span>
+              </div>
+            </div>
+            <div class="carac-bloc">
+              <label>MENTAL</label>
+              <div class="carac-inputs">
+                <input type="number"
+                       name="{{concat 'system.' this.key '.mental.value'}}"
+                       value="{{this.mental.value}}"
+                       min="0" max="{{this.maxCarac}}" />
+                <span class="max-val">/ {{this.maxCarac}}</span>
+              </div>
+            </div>
+          </div>
+
+          {{!-- Compétences --}}
+          <div class="array-section">
+            <div class="array-section-header">
+              <span class="array-section-title">Compétences</span>
+              <button type="button" class="btn-add-array btn-plus"
+                      data-stade="{{this.key}}" data-type="competences">+</button>
+            </div>
+            {{#each this.competences}}
+            <div class="array-row" data-stade="{{../key}}" data-type="competences" data-index="{{@index}}">
+              <input type="text" class="array-nom" value="{{this.nom}}" placeholder="Compétence…" />
+              <select class="array-duree">
+                <option value="permanent" {{metaSelected this.duree "permanent"}}>Permanent</option>
+                <option value="courte"    {{metaSelected this.duree "courte"}}>Courte durée</option>
+                <option value="fugace"    {{metaSelected this.duree "fugace"}}>Fugace</option>
+              </select>
+              <select class="array-intensite">
+                <option value="faible"      {{metaSelected this.intensite "faible"}}>Faible</option>
+                <option value="fort"        {{metaSelected this.intensite "fort"}}>Fort</option>
+                <option value="surpuissant" {{metaSelected this.intensite "surpuissant"}}>Surpuissant</option>
+              </select>
+              <button type="button" class="btn-remove-array btn-minus">×</button>
+            </div>
+            {{/each}}
+          </div>
+
+          {{!-- Techniques --}}
+          <div class="array-section">
+            <div class="array-section-header">
+              <span class="array-section-title">Techniques</span>
+              <button type="button" class="btn-add-array btn-plus"
+                      data-stade="{{this.key}}" data-type="techniques">+</button>
+            </div>
+            {{#each this.techniques}}
+            <div class="array-row" data-stade="{{../key}}" data-type="techniques" data-index="{{@index}}">
+              <input type="text" class="array-nom" value="{{this.nom}}" placeholder="Technique…" />
+              <select class="array-duree">
+                <option value="permanent" {{metaSelected this.duree "permanent"}}>Permanent</option>
+                <option value="courte"    {{metaSelected this.duree "courte"}}>Courte durée</option>
+                <option value="fugace"    {{metaSelected this.duree "fugace"}}>Fugace</option>
+              </select>
+              <select class="array-intensite">
+                <option value="faible"      {{metaSelected this.intensite "faible"}}>Faible</option>
+                <option value="fort"        {{metaSelected this.intensite "fort"}}>Fort</option>
+                <option value="surpuissant" {{metaSelected this.intensite "surpuissant"}}>Surpuissant</option>
+              </select>
+              <button type="button" class="btn-remove-array btn-minus">×</button>
+            </div>
+            {{/each}}
+          </div>
+
+          {{!-- Capacités (stades 5-10) --}}
+          {{#if this.hasCapacites}}
+          <div class="array-section array-section--capacites">
+            <div class="array-section-header">
+              <span class="array-section-title">Capacités</span>
+              <button type="button" class="btn-add-array btn-plus"
+                      data-stade="{{this.key}}" data-type="capacites">+</button>
+            </div>
+            {{#each this.capacites}}
+            <div class="array-row" data-stade="{{../key}}" data-type="capacites" data-index="{{@index}}">
+              <input type="text" class="array-nom" value="{{this.nom}}" placeholder="Capacité…" />
+              <select class="array-duree">
+                <option value="permanent" {{metaSelected this.duree "permanent"}}>Permanent</option>
+                <option value="courte"    {{metaSelected this.duree "courte"}}>Courte durée</option>
+                <option value="fugace"    {{metaSelected this.duree "fugace"}}>Fugace</option>
+              </select>
+              <select class="array-intensite">
+                <option value="faible"      {{metaSelected this.intensite "faible"}}>Faible</option>
+                <option value="fort"        {{metaSelected this.intensite "fort"}}>Fort</option>
+                <option value="surpuissant" {{metaSelected this.intensite "surpuissant"}}>Surpuissant</option>
+              </select>
+              <button type="button" class="btn-remove-array btn-minus">×</button>
+            </div>
+            {{/each}}
+          </div>
+          {{/if}}
+
+        </div>{{!-- /stade-content --}}
+      </div>{{!-- /stade-block --}}
+      {{/each}}
+
+    </section>
+
+    {{!-- ════ TAB : INVENTAIRE ════ --}}
+    <section class="tab inventaire" data-group="primary" data-tab="inventaire">
+
+      <div class="inv-toolbar">
+        <span class="inv-title">Équipement</span>
+        <button type="button" class="btn-add-inv btn-plus">+ Ajouter</button>
+      </div>
+
+      <div class="inv-list">
+        {{#each inventaire}}
+        <div class="inv-row" data-index="{{@index}}">
+          <i class="fas fa-circle-dot inv-icon"></i>
+          <input type="text" class="inv-nom" value="{{this.nom}}" placeholder="Nom de l'objet…" />
+          <button type="button" class="btn-remove-inv btn-minus">×</button>
+        </div>
+        {{/each}}
+        {{#unless inventaire.length}}
+        <div class="inv-empty">Aucun équipement. Cliquez « + Ajouter » pour en créer.</div>
+        {{/unless}}
+      </div>
+
+    </section>
+
+  </div>{{!-- /sheet-body --}}
+</form>

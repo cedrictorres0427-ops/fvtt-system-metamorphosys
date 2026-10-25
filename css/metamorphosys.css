@@ -1,0 +1,569 @@
+/* ═══════════════════════════════════════════════════════════
+   METAMORPHOSYS — Foundry VTT System Stylesheet v2
+   ═══════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --m-bg:           #0f0c04;
+  --m-sheet:        #18120a;
+  --m-parchment:    #221808;
+  --m-border:       #5a3e1b;
+  --m-border-hi:    #8b5e1a;
+  --m-crimson:      #8b0000;
+  --m-crimson-hi:   #c0392b;
+  --m-gold:         #c9a96e;
+  --m-gold-hi:      #e8cc8a;
+  --m-silver:       #9a9a9a;
+  --m-dim:          #7a5e30;
+  --m-input:        #0c0902;
+  --m-badge:        #321400;
+  --m-badge-border: #7a4a00;
+  --m-font-title:   'Cinzel', 'Palatino Linotype', Palatino, serif;
+  --m-font-body:    'Crimson Text', 'Palatino Linotype', Georgia, serif;
+}
+
+/* ══ WINDOW ══ */
+.app.window-app.metamorphosys .window-header {
+  background: linear-gradient(to right, #1a0000, #2d1a0a, #1a0000);
+  border-bottom: 2px solid var(--m-crimson);
+  color: var(--m-gold);
+  font-family: var(--m-font-title);
+  text-shadow: 0 0 8px rgba(192,57,43,0.5);
+}
+
+.app.window-app.metamorphosys .window-title { color: var(--m-gold-hi); font-family: var(--m-font-title); letter-spacing: 0.06em; }
+.app.window-app.metamorphosys .window-content { background: var(--m-sheet); padding: 0; }
+
+/* ══ SHEET ROOT ══ */
+.epine-sheet {
+  background: var(--m-sheet);
+  color: var(--m-gold);
+  font-family: var(--m-font-body);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Global inputs/selects ── */
+.epine-sheet input[type="text"],
+.epine-sheet input[type="number"],
+.epine-sheet select {
+  background: var(--m-input);
+  border: 1px solid var(--m-border);
+  border-radius: 3px;
+  color: var(--m-gold);
+  font-family: var(--m-font-body);
+  font-size: 13px;
+  padding: 2px 5px;
+  transition: border-color 0.15s;
+}
+.epine-sheet input:focus,
+.epine-sheet select:focus { border-color: var(--m-gold); outline: none; }
+
+/* ══ HEADER ══ */
+.epine-sheet .sheet-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #1a0500 0%, #2a1806 50%, #1a0500 100%);
+  border-bottom: 2px solid var(--m-crimson);
+  flex-shrink: 0;
+}
+
+.epine-sheet .profile-img {
+  width: 80px; height: 80px;
+  object-fit: cover;
+  border: 2px solid var(--m-border-hi);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(139,0,0,0.5);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.epine-sheet .header-info { flex: 1; }
+
+.epine-sheet .charname input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--m-border);
+  color: var(--m-gold-hi);
+  font-family: var(--m-font-title);
+  font-size: 1.25em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 0 4px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 8px rgba(201,169,110,0.3);
+}
+.epine-sheet .charname input:focus { outline: none; border-bottom-color: var(--m-gold); }
+
+.epine-sheet .identity-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+}
+
+.epine-sheet .id-cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.epine-sheet .id-cell label {
+  color: var(--m-dim);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.epine-sheet .id-cell.narrow input { width: 58px; text-align: center; }
+
+/* ══ TOTAUX BAR ══ */
+.epine-sheet .totaux-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #1a0000, #3a0000, #1a0000);
+  border-bottom: 1px solid var(--m-crimson);
+  padding: 7px 0;
+  flex-shrink: 0;
+}
+.epine-sheet .total-bloc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+.epine-sheet .total-label {
+  font-family: var(--m-font-title);
+  font-size: 0.65em;
+  letter-spacing: 0.12em;
+  color: var(--m-dim);
+  text-transform: uppercase;
+}
+.epine-sheet .total-value {
+  font-family: var(--m-font-title);
+  font-size: 1.9em;
+  font-weight: 700;
+  color: var(--m-gold-hi);
+  line-height: 1.1;
+  text-shadow: 0 0 10px rgba(232,204,138,0.4);
+}
+.epine-sheet .total-sep { color: var(--m-crimson); font-size: 1.2em; opacity: 0.55; }
+
+/* ══ STADE VUE BAR ══ */
+.epine-sheet .stade-vue-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 5px 12px;
+  background: #0e0a03;
+  border-bottom: 1px solid var(--m-border);
+  flex-shrink: 0;
+}
+.epine-sheet .vue-label {
+  font-family: var(--m-font-title);
+  font-size: 0.7em;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--m-dim);
+  white-space: nowrap;
+}
+.epine-sheet .stade-vue-bar select {
+  background: var(--m-input);
+  border: 1px solid var(--m-border);
+  border-radius: 3px;
+  color: var(--m-gold);
+  font-family: var(--m-font-body);
+  font-size: 13px;
+  padding: 2px 8px;
+  min-width: 200px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.epine-sheet .stade-vue-bar select:focus { border-color: var(--m-gold); outline: none; }
+
+/* ══ DEBLOQUE CHECKBOX ══ */
+.epine-sheet .stade-debloque-cb {
+  /* custom checkbox */
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--m-border);
+  border-radius: 2px;
+  background: var(--m-input);
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+  margin: 0;
+}
+.epine-sheet .stade-debloque-cb:checked {
+  background: var(--m-crimson);
+  border-color: var(--m-crimson-hi);
+}
+.epine-sheet .stade-debloque-cb:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  font-size: 11px;
+  color: var(--m-gold-hi);
+  font-weight: bold;
+  line-height: 1;
+}
+.epine-sheet .stade-debloque-cb:hover { border-color: var(--m-gold); }
+
+/* ══ LOCKED vs UNLOCKED stage visual states ══ */
+/* Locked stage: dim header text */
+.epine-sheet .stade-block:not(.stade-debloque) .stade-header {
+  background: linear-gradient(to right, #120000, #1e0800, #120000);
+}
+.epine-sheet .stade-block:not(.stade-debloque) .stade-name {
+  color: var(--m-dim);
+  opacity: 0.7;
+}
+.epine-sheet .stade-block:not(.stade-debloque) .stade-num {
+  background: #4a2020;
+  color: var(--m-dim);
+}
+.epine-sheet .stade-block:not(.stade-debloque) .stade-oeil,
+.epine-sheet .stade-block:not(.stade-debloque) .seuil-badge {
+  opacity: 0.5;
+}
+
+/* Unlocked stage: gold accent on the roman numeral */
+.epine-sheet .stade-block.stade-debloque .stade-num {
+  background: var(--m-crimson);
+  box-shadow: 0 0 6px rgba(192,57,43,0.5);
+}
+.epine-sheet .stade-block.stade-debloque .stade-header {
+  background: linear-gradient(to right, #1e0000, #2e0e00, #1e0000);
+}
+
+/* ══ TABS ══ */
+.epine-sheet .sheet-tabs {
+  display: flex;
+  background: #0c0902;
+  border-bottom: 1px solid var(--m-border);
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+.epine-sheet .sheet-tabs .item {
+  padding: 6px 20px;
+  font-family: var(--m-font-title);
+  font-size: 0.78em;
+  letter-spacing: 0.05em;
+  color: var(--m-dim);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s;
+  user-select: none;
+}
+.epine-sheet .sheet-tabs .item:hover { color: var(--m-gold); background: rgba(139,0,0,0.1); }
+.epine-sheet .sheet-tabs .item.active {
+  color: var(--m-gold-hi);
+  border-bottom-color: var(--m-crimson);
+}
+
+/* ══ SHEET BODY ══ */
+.epine-sheet .sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--m-border) var(--m-sheet);
+}
+.epine-sheet .sheet-body::-webkit-scrollbar { width: 5px; }
+.epine-sheet .sheet-body::-webkit-scrollbar-track { background: var(--m-sheet); }
+.epine-sheet .sheet-body::-webkit-scrollbar-thumb { background: var(--m-border); border-radius: 3px; }
+
+.epine-sheet .tab { display: none; }
+.epine-sheet .tab.active { display: block; }
+
+/* ══ ACCORDION — STADE BLOCKS ══ */
+.epine-sheet .stade-block {
+  background: var(--m-parchment);
+  border: 1px solid var(--m-border);
+  border-radius: 5px;
+  margin-bottom: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* ── Header (clickable toggle) ── */
+.epine-sheet .stade-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(to right, #1e0000, #2e0e00, #1e0000);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--m-crimson);
+  transition: background 0.15s;
+}
+.epine-sheet .stade-header:hover { background: linear-gradient(to right, #2a0000, #3e1400, #2a0000); }
+
+.epine-sheet .stade-num {
+  background: var(--m-crimson);
+  color: var(--m-gold-hi);
+  border-radius: 3px;
+  padding: 1px 7px;
+  font-family: var(--m-font-title);
+  font-size: 0.72em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.epine-sheet .stade-name {
+  font-family: var(--m-font-title);
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--m-crimson-hi);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.epine-sheet .stade-oeil {
+  font-size: 0.8em;
+  color: var(--m-dim);
+  font-style: italic;
+  font-family: var(--m-font-body);
+}
+.epine-sheet .seuil-badge {
+  background: var(--m-badge);
+  border: 1px solid var(--m-badge-border);
+  border-radius: 3px;
+  color: var(--m-gold);
+  font-size: 0.72em;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+.epine-sheet .stade-chevron {
+  margin-left: auto;
+  color: var(--m-dim);
+  font-size: 0.8em;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+/* ── Accordion open/close ── */
+.epine-sheet .stade-content {
+  display: none;
+}
+.epine-sheet .stade-block.open .stade-content {
+  display: block;
+}
+.epine-sheet .stade-block.open .stade-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Carac row ── */
+.epine-sheet .carac-row {
+  display: flex;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid rgba(90,62,27,0.35);
+  gap: 4px;
+}
+.epine-sheet .carac-bloc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  border-right: 1px solid rgba(90,62,27,0.3);
+}
+.epine-sheet .carac-bloc:last-child { border-right: none; }
+.epine-sheet .carac-bloc > label {
+  font-family: var(--m-font-title);
+  font-size: 0.62em;
+  letter-spacing: 0.1em;
+  color: var(--m-dim);
+  text-transform: uppercase;
+}
+.epine-sheet .carac-inputs { display: flex; align-items: center; gap: 4px; }
+.epine-sheet .carac-inputs input[type="number"] {
+  width: 52px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: var(--m-gold-hi);
+  background: rgba(0,0,0,0.4);
+}
+.epine-sheet .max-val { color: var(--m-dim); font-size: 0.82em; }
+
+/* ══ OVERRIDE Foundry v13 button defaults inside our sheet ══ */
+.epine-sheet button {
+  display: inline-block !important;
+  width: auto !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box;
+}
+
+/* ══ ARRAY SECTIONS (Compétences / Techniques / Capacités) ══ */
+.epine-sheet .array-section {
+  padding: 7px 12px 6px;
+  border-bottom: 1px solid rgba(90,62,27,0.25);
+}
+.epine-sheet .array-section:last-child { border-bottom: none; }
+
+.epine-sheet .array-section--capacites .array-section-title {
+  color: var(--m-silver);
+}
+
+.epine-sheet .array-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.epine-sheet .array-section-title {
+  font-family: var(--m-font-title);
+  font-size: 0.68em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--m-dim);
+}
+
+/* ── Array row ── */
+.epine-sheet .array-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  padding: 3px 0;
+}
+
+/* Name field: flex-grow to fill all remaining space */
+.epine-sheet .array-row .array-nom {
+  flex: 1 1 0% !important;
+  width: 0 !important;      /* forces flex to own the sizing */
+  min-width: 0 !important;
+  font-style: italic;
+  color: var(--m-gold);
+  box-sizing: border-box;
+}
+
+/* Selects: shrink to content */
+.epine-sheet .array-row .array-duree,
+.epine-sheet .array-row .array-intensite {
+  flex: 0 0 auto;
+  width: auto;
+  font-size: 0.78em;
+  padding: 2px 3px;
+  color: var(--m-gold);
+}
+
+/* ══ BUTTONS ══ */
+.epine-sheet .btn-plus {
+  background: var(--m-crimson);
+  border: 1px solid var(--m-crimson-hi);
+  border-radius: 3px;
+  color: var(--m-gold-hi);
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 2px 9px;
+  transition: background 0.15s;
+}
+.epine-sheet .btn-plus:hover { background: var(--m-crimson-hi); }
+
+/* Small × delete button */
+.epine-sheet .btn-minus,
+.epine-sheet .btn-remove-array,
+.epine-sheet .btn-remove-inv {
+  background: transparent !important;
+  border: 1px solid var(--m-border) !important;
+  border-radius: 3px !important;
+  color: var(--m-dim) !important;
+  cursor: pointer !important;
+  font-size: 0.82em !important;
+  line-height: 1 !important;
+  padding: 1px 6px !important;
+  transition: all 0.15s;
+}
+.epine-sheet .btn-minus:hover,
+.epine-sheet .btn-remove-array:hover,
+.epine-sheet .btn-remove-inv:hover {
+  border-color: var(--m-crimson-hi) !important;
+  color: var(--m-crimson-hi) !important;
+}
+
+/* ══ INVENTAIRE TAB ══ */
+.epine-sheet .inv-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--m-border);
+}
+.epine-sheet .inv-title {
+  font-family: var(--m-font-title);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--m-dim);
+}
+.epine-sheet .btn-add-inv {
+  background: var(--m-crimson);
+  border: 1px solid var(--m-crimson-hi);
+  border-radius: 3px;
+  color: var(--m-gold-hi);
+  cursor: pointer;
+  font-family: var(--m-font-title);
+  font-size: 0.72em;
+  letter-spacing: 0.05em;
+  padding: 3px 12px;
+  transition: background 0.15s;
+}
+.epine-sheet .btn-add-inv:hover { background: var(--m-crimson-hi); }
+
+.epine-sheet .inv-list { display: flex; flex-direction: column; gap: 5px; }
+
+.epine-sheet .inv-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--m-parchment);
+  border: 1px solid var(--m-border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  transition: border-color 0.15s;
+}
+.epine-sheet .inv-row:hover { border-color: var(--m-border-hi); }
+
+.epine-sheet .inv-icon { color: var(--m-crimson); font-size: 0.6em; flex-shrink: 0; }
+
+.epine-sheet .inv-nom {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--m-gold);
+  font-size: 0.95em;
+  padding: 0 2px;
+}
+.epine-sheet .inv-nom:focus {
+  outline: none;
+  border-bottom-color: var(--m-gold);
+  background: rgba(0,0,0,0.2);
+}
+
+/* btn-remove-inv hover handled above in consolidated rule */
+
+.epine-sheet .inv-empty {
+  color: var(--m-dim);
+  font-style: italic;
+  font-size: 0.88em;
+  padding: 16px;
+  text-align: center;
+  border: 2px dashed var(--m-border);
+  border-radius: 5px;
+}
